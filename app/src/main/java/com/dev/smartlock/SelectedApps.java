@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.melnykov.fab.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -72,6 +74,7 @@ public class SelectedApps extends Fragment
         protected void onPostExecute(Void aVoid) {
             AllApps.killList=killList;
             new LoadSelectedApp().execute();
+            Toast.makeText(getActivity(),"Death list updated",Toast.LENGTH_SHORT).show();
         }
     }
 

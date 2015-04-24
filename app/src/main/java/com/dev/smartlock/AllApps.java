@@ -74,6 +74,11 @@ public class AllApps extends Fragment
             }
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Toast.makeText(getActivity(),"Death list updated",Toast.LENGTH_SHORT).show();
+        }
     }
 
     private class LoadInstalledApp extends AsyncTask<Void,Void,Void>
@@ -91,8 +96,7 @@ public class AllApps extends Fragment
             {
                 editor.putBoolean("ROOT",false);
                 editor.apply();
-                Toast.makeText(getActivity(), "Root not detected! I'll kill anyway your selected apps but it won't have the same effects as on " +
-                        "a rooted device!", Toast.LENGTH_LONG).show();
+                publishProgress();
             }
             PackageManager appInfo=getActivity().getPackageManager();
             final PackageManager pm=getActivity().getPackageManager();
@@ -129,7 +133,12 @@ public class AllApps extends Fragment
                 killList.add(cursor.getString(0));
             ListAdapter adapter=new ListAdapter(getActivity(),R.layout.app_item,ChooseAppActivity.apps,killList);
             listView.setAdapter(adapter);
+        }
 
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            Toast.makeText(getActivity(), "Root not detected! I'll kill anyway your selected apps but it won't have the same effects as on " +
+                    "a rooted device!", Toast.LENGTH_LONG).show();
         }
     }
 

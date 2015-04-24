@@ -252,7 +252,7 @@ public class ChooseAppActivity extends ActionBarActivity implements MaterialTabL
                         }
                         catch (Exception exc)
                         {
-
+                            exc.printStackTrace();
                         }
                     }
                 }
